@@ -1,24 +1,36 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* User
 
-Things you may want to cover:
+|  Name  |  culumn  |
+| ---- | ---- |
+|  id  |  integer  |
+|  name  |  string  |
+|  email  |  string  |
+|  password_digest  |  string  |
 
-* Ruby version
+* Task
 
-* System dependencies
+|  Name  |  culumn  |
+| ---- | ---- |
+|  user_id  |  bigint  |
+|  title  |  string  |
+|  content  |  string  |
+|  status  |  integer  |
+|  deadline  |  date  |
+|  priority  |  integer  |
 
-* Configuration
+* Session
 
-* Database creation
+|  Name  |  culumn  |
+| ---- | ---- |
+|  user_id  |  bigint  |
+|  email  |  string  |
+|  password_digest  |  string  |
 
-* Database initialization
+* Label
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+|  Name  |  culumn  |
+| ---- | ---- |
+|  task_id  |  bigint  |
+|  name  |  string  |
