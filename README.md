@@ -15,7 +15,7 @@
 | ---- | ---- |
 |  user_id  |  bigint  |
 |  title  |  string  |
-|  content  |  string  |
+|  content  |  text  |
 |  status  |  integer  |
 |  deadline  |  date  |
 |  priority  |  integer  |
