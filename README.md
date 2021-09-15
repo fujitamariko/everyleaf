@@ -34,3 +34,16 @@
 | ---- | ---- |
 |  task_id  |  bigint  |
 |  name  |  string  |
+
+
+|  Herokuへのデプロイ方法  |
+| ---- |
+|  1.アセットプリコンパイルをする  |
+|  :$ rails assets:precompile RAILS_ENV=production  |
+|  2.コミットする  |
+|  :$ git add .  |
+|  :$ git commit -m "init"  |
+|  3.Herokuに新しいアプリケーションを作成  |
+|  :$ heroku create  |
+|  4.Herokuにデプロイをする  |
+|  :$ git push heroku master  |
