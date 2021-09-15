@@ -42,7 +42,7 @@
 |  :$ rails assets:precompile RAILS_ENV=production  |
 |  2.コミットする  |
 |  :$ git add .  |
-|  :$ git commit -m "init"  |
+|  :$ git commit -m "〜"  |
 |  3.Herokuに新しいアプリケーションを作成  |
 |  :$ heroku create  |
 |  4.Herokuにデプロイをする  |
