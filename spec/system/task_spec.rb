@@ -18,6 +18,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       select '2021', from: 'task_deadline_1i'
       select 'September', from: 'task_deadline_2i'
       select '30', from: 'task_deadline_3i'
+      select '完了', from: 'task_status'
 
       # 3. 「登録する」というvalue（表記文字）のあるボタンをクリックする
       click_button 'Create Task'
@@ -28,6 +29,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       expect(page).to have_content '2021'
       expect(page).to have_content '09'
       expect(page).to have_content '30'
+      expect(page).to have_content '完了'
       end
     end
   end
@@ -67,17 +69,46 @@ RSpec.describe 'タスク管理機能', type: :system do
   describe '詳細表示機能' do
      context '任意のタスク詳細画面に遷移した場合' do
        it '該当タスクの内容が表示される' do
-        # visit task_path
-        # click_on '編集する'
-        # fill_in 'task[title]', with: 'test_title2'
-        # fill_in 'task[content]', with: 'test_content2'
-        # click_on '登録'
-        # expect(page).to have_content 'task_title'
         task = FactoryBot.create(:task)
-        # task = FactoryBot.create(:second_task)
         visit task_path(task.id)
         expect(page).to have_content 'test_title'
        end
      end
+  end
+
+  describe '検索機能' do
+    before do
+      FactoryBot.create(:task)
+      FactoryBot.create(:second_task)
+    end
+
+    context 'タイトルであいまい検索をした場合' do
+      it "検索キーワードを含むタスクで絞り込まれる" do
+        visit tasks_path
+        fill_in "Title", with: 'test_title'
+        click_button 'Search'
+        expect(page).to have_content 'test_title'
+      end
+    end
+
+    context 'ステータス検索をした場合' do
+      it "ステータスに完全一致するタスクが絞り込まれる" do
+        visit tasks_path
+        select "完了", from: 'Status'
+        click_button 'Search'
+        expect(page).to have_content '完了'
+      end
+    end
+
+    context 'タイトルのあいまい検索とステータス検索をした場合' do
+      it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
+        visit tasks_path
+        fill_in "Title", with: 'test_title'
+        select "完了", from: 'Status'
+        click_button 'Search'
+        expect(page).to have_content 'test_title'
+        expect(page).to have_content '完了'
+      end
+    end
   end
 end
