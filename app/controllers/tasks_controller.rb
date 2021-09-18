@@ -11,11 +11,21 @@ class TasksController < ApplicationController
         @tasks = Task.all
       end
 
-      #タイトル名の検索
+      #タイトル名・ステータスの検索
       if params[:search].present?
-        @tasks = Task.where("title LIKE ?","%#{params[:search][:title]}%") 
+        if params[:search][:title].present? && params[:search][:status].present?
+          #両方title and statusが成り立つ検索結果を返す
+          @tasks = Task.where('title LIKE ?', "%#{params[:search][:title]}%").where(status: params[:search][:status])
+  
+          #渡されたパラメータがtask titleのみだったとき
+        elsif params[:search][:title].present?
+          @tasks = Task.where('title LIKE ?', "%#{params[:search][:title]}%")
+  
+          #渡されたパラメータがステータスのみだったとき
+        elsif params[:search][:status].present?
+          @tasks = Task.where(status: params[:search][:status])
+        end
       end
-
     end
 
     def show

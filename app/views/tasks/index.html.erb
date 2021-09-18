@@ -6,6 +6,8 @@
   <tr>
     <th><%= form.label(:title, 'Title') %></th>
     <td><%= form.text_field :title %></td>
+    <td><%= form.label :status, 'Status' %></td>
+    <td><%= form.select :status, Task.statuses.keys, include_blank: true %></td>
     <td><%= form.submit('Search')%></td>
   </tr>
   <% end %>
