@@ -2,11 +2,20 @@ class TasksController < ApplicationController
     before_action :set_task, only: [:show, :edit, :update, :destroy]
 
     def index
+      #終了期限・優先順位で昇降ソート
       if params[:sort_expired]
         @tasks = Task.all.order('deadline DESC')
+      elsif params[:sort_priority]
+        @tasks = Task.all.order('priority ASC')
       else
         @tasks = Task.all
       end
+
+      #タイトル名の検索
+      if params[:search].present?
+        @tasks = Task.where("title LIKE ?","%#{params[:search][:title]}%") 
+      end
+
     end
 
     def show

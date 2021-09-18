@@ -2,6 +2,16 @@
 <p><%= notice %></p>
 
 <table>
+  <%= form_with(scope: :search, url:tasks_path, method: :get,local: true)do |form| %>
+  <tr>
+    <th><%= form.label(:title, 'Title') %></th>
+    <td><%= form.text_field :title %></td>
+    <td><%= form.submit('Search')%></td>
+  </tr>
+  <% end %>
+</table>
+
+<table>
   <thead>
     <tr>
       <th>Title</th>
