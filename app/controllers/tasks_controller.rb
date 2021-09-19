@@ -2,7 +2,6 @@ class TasksController < ApplicationController
     before_action :set_task, only: [:show, :edit, :update, :destroy]
 
     def index
-<<<<<<< HEAD
       #終了期限・優先順位で昇降ソート
       if params[:sort_expired]
         @tasks = Task.all.order('deadline DESC').page(params[:page]).per(5)
@@ -27,9 +26,6 @@ class TasksController < ApplicationController
           @tasks = Task.where(status: params[:search][:status]).page(params[:page]).per(5)
         end
       end
-=======
-        @tasks = Task.all.order(id: "DESC")
->>>>>>> master
     end
 
     def show
