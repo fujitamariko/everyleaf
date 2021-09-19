@@ -77,11 +77,6 @@ RSpec.describe 'タスク管理機能', type: :system do
   end
 
   describe '検索機能' do
-    before do
-      FactoryBot.create(:task)
-      FactoryBot.create(:second_task)
-    end
-
     context 'タイトルであいまい検索をした場合' do
       it "検索キーワードを含むタスクで絞り込まれる" do
         visit tasks_path
@@ -108,6 +103,16 @@ RSpec.describe 'タスク管理機能', type: :system do
         click_button 'Search'
         expect(page).to have_content 'test_title'
         expect(page).to have_content '完了'
+      end
+    end
+
+    context '優先順位でソートするをクリックした場合場合' do
+      it '優先順位が高い順に並んでいる' do
+        visit tasks_path
+        click_on '優先順位が高い順にソートする'
+        task_list = all('.task_row')
+        expect(task_list[0]).to have_content '高'
+        expect(task_list[1]).to have_content '中'
       end
     end
   end
