@@ -4,26 +4,26 @@ class TasksController < ApplicationController
     def index
       #終了期限・優先順位で昇降ソート
       if params[:sort_expired]
-        @tasks = Task.all.order('deadline DESC')
+        @tasks = Task.all.order('deadline DESC').page(params[:page]).per(5)
       elsif params[:sort_priority]
-        @tasks = Task.all.order('priority ASC')
+        @tasks = Task.all.order('priority ASC').page(params[:page]).per(5)
       else
-        @tasks = Task.all
+        @tasks = Task.all.page(params[:page]).per(5)
       end
 
       #タイトル名・ステータスの検索
       if params[:search].present?
         if params[:search][:title].present? && params[:search][:status].present?
           #両方title and statusが成り立つ検索結果を返す
-          @tasks = Task.where('title LIKE ?', "%#{params[:search][:title]}%").where(status: params[:search][:status])
+          @tasks = Task.where('title LIKE ?', "%#{params[:search][:title]}%").where(status: params[:search][:status]).page(params[:page]).per(5)
   
           #渡されたパラメータがtask titleのみだったとき
         elsif params[:search][:title].present?
-          @tasks = Task.where('title LIKE ?', "%#{params[:search][:title]}%")
+          @tasks = Task.where('title LIKE ?', "%#{params[:search][:title]}%").page(params[:page]).per(5)
   
           #渡されたパラメータがステータスのみだったとき
         elsif params[:search][:status].present?
-          @tasks = Task.where(status: params[:search][:status])
+          @tasks = Task.where(status: params[:search][:status]).page(params[:page]).per(5)
         end
       end
     end
