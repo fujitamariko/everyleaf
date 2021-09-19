@@ -47,6 +47,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         # expectの結果が true ならテスト成功、false なら失敗として結果が出力される
       end
     end
+    
     context 'タスクが作成日時の降順に並んでいる場合' do
       it '新しいタスクが一番上に表示される' do
         visit tasks_path
@@ -55,6 +56,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(page).to have_content 'test_title2'
       end
     end
+
     context '終了期限でソートするを押した場合' do
       it '終了期限の降順に並び替えられたタスク一覧が表示される'do
         visit tasks_path
