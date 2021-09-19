@@ -1,6 +1,9 @@
 <h1>タスク詳細画面</h1>
 <p>Title: <%= @task.title %></p>
 <p>Content: <%= @task.content %></p>
+<p>Deadline: <%= @task.deadline %></p>
+<p>Status: <%= @task.status %></p>
+<p>Priority: <%= @task.priority %></p>
 
 <br>
 <%= link_to 'Edit', edit_task_path(@task) %> |

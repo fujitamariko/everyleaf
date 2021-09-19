@@ -20,6 +20,21 @@
       <%= form.text_field :content %>
     </div>
 
+    <div class="task_deadline">
+      <%= form.label :deadline %>
+      <%= form.date_select :deadline %>
+    </div>
+
+    <div class="task_status">
+      <%= form.label :status %>
+      <%= form.select :status, [["未着手", "未着手"], ["着手中", "着手中"], ["完了", "完了"]], include_blank: "選択して下さい"  %>
+    </div>
+
+    <div class="task_priority">
+      <%= form.label :priority %>
+      <%= form.select :priority, [["低", "低"], ["中", "中"], ["高", "高"]], include_blank: "選択して下さい" %>
+    </div>
+
     <%= form.submit %>
 
 <% end %>
