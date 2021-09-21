@@ -1,0 +1,37 @@
+<h2><%= @user.name %>のページ編集</h2>
+<br>
+
+<%= form_with(model: [:admin, @user], local: true) do |form| %>
+
+    <div class="user_list">
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+
+    <div class="user_list">
+      <%= form.label :email %>
+      <%= form.email_field :email %>
+    </div>
+
+    <div class="user_list">
+      <%= form.label :管理者権限 %>
+      <%= form.check_box :admin %>
+    </div>
+
+    <div class="user_list">
+      <%= form.label :password %>
+      <%= form.password_field :password %>
+    </div>
+
+    <div class="user_list">
+      <%= form.label :password_confirmation %>
+      <%= form.password_field :password_confirmation %>
+    </div>
+
+    <%= form.submit %>
+<% end %>
+
+<br>
+<br>
+<%= link_to "マイページに戻る", user_path(current_user.id) %>
+<%= link_to "管理画面に戻る", admin_users_path %>

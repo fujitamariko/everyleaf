@@ -1,0 +1,35 @@
+<div class="show clearfix">
+  <h1><%= @user.name %>のマイページ</h1>
+  <% if @user == current_user %>
+  <%= link_to 'タスク登録', new_task_path %>
+  <%= link_to 'プロフィール編集', edit_user_path %>
+  <% end %>
+</div>
+<br>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Created Time</th>
+      <th>Deadline</th>
+      <th>Status</th>
+      <th>Priority</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user.tasks.each do |task| %>
+      <tr>
+        <td><%= task.title %></td>
+        <td><%= task.created_at %></td>
+        <td><%= task.deadline %></td>
+        <td><%= task.status %></td>
+        <td><%= task.priority %></td>
+        <td><%= link_to 'Show', task_path(task.id), class:"btn btn-primary mr-3" %></td>
+        <td><%= link_to "Edit", edit_task_path(task.id), data: { confirm: 'Are you sure?' }, class: "btn btn-success mr-3" %></td>
+        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger mr-3" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
