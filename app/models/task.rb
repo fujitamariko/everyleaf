@@ -8,4 +8,6 @@ class Task < ApplicationRecord
     scope :search_by_task_title, -> (search){where('title like ?', "%#{search}%" )}
     scope :search_by_status, -> status { where(status: status) }
     belongs_to :user
-end  
+    has_many :labellings, dependent: :destroy
+    has_many :labels, through: :labellings
+end
