@@ -16,7 +16,7 @@ class User < ApplicationRecord
           throw :abort if user[0] == self
         end
     end
-    
+
     def reject_update_admin
         if User.where(admin: true).count == 1 && admin == false
           user = User.where(admin: true)
